@@ -69,7 +69,7 @@ G. ¿Cuál es la carrera que tiene más alumnos?
         	carreraIngresada=prompt("ERROR.Ingrese carrera: programación, psicología, diseño gráfico");
         }
 
-		estadoDeCarreraIngresado=prompt("Ingrese el estado de la carrera: en curso-abandono-finalizado");
+		    estadoDeCarreraIngresado=prompt("Ingrese el estado de la carrera: en curso-abandono-finalizado");
         while(isNaN(estadoDeCarreraIngresado)==false || estadoDeCarreraIngresado!="en curso" &&  estadoDeCarreraIngresado!="abandono" && estadoDeCarreraIngresado!="finalizado")
         {
         	estadoDeCarreraIngresado=prompt("ERROR.Ingrese el estado de la carrera: en curso-abandono-finalizado");
@@ -441,10 +441,10 @@ function probarEjercicio()
     acumuladorEdadGenerico=0;
     contadorPeterbald=0;
     acumuladorEdadPeterbald=0;
-	banderaPrimerGato=1;
+	  banderaPrimerGato=1;
     banderaPrimerPerro=1;
-	banderaPrimerPajaro=1;
-	banderaPrimerOtros=1;
+	  banderaPrimerPajaro=1;
+	  banderaPrimerOtros=1;
 
 	for(contadorMascotas=0;contadorMascotas<10;contadorMascotas++)
 	{
@@ -472,7 +472,7 @@ function probarEjercicio()
         	edadIngresada=parseInt(edadIngresada);
         	while(isNaN(edadIngresada)==true|| edadIngresada<1|| edadIngresada>20)
         	{
-                 edadIngresada=prompt("ERROR.Ingrese la edad ente 1 y 20");
+                edadIngresada=prompt("ERROR.Ingrese la edad ente 1 y 20");
         	     edadIngresada=parseInt(edadIngresada);
         	}
         	if (banderaPrimerGato==1 || edadIngresada>edadGatoMasviejo) 
@@ -485,7 +485,7 @@ function probarEjercicio()
         	{
         		case "siames":
         		contadorSiames++;
-        		acumuladorEdadSiames=acumuladorSiames+edadIngresada;
+        		acumuladorEdadSiames=acumuladorEdadSiames+edadIngresada;
         		break;
 
         		case "turco":
@@ -585,7 +585,7 @@ function probarEjercicio()
 		console.log("no hay perros");
 	}else
 	{
-        console.log("El pajaro mas viejo se llama: "+nombrePerroMasViejo);
+        console.log("El perro mas viejo se llama: "+nombrePerroMasViejo);
 	}
 	if (banderaPrimerOtros==1) 
 	{

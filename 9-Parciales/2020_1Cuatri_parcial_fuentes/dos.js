@@ -17,128 +17,122 @@ function mostrar()
   var respuesta;
   var tipoIngresado;
   var cantidadBolsasIngresadas;
-  var precioPorBolsasIngresadas;
-  var acumuladorCantidadBolsas;
-  var precioBruto;
-  var acumuladorCantidadArena;
-  var acumuladorCantidadCal;
-  var acumuladorCantidadCemento;
-  var tipoMasCantidasBolsas;
-  var acumuladorPrecioBruto;
-  var descuento;
-  var precioConDescuento;
+  var precioIngresado;
   var porcentaje;
-  var acumuladorPrecioCemento;
-  var acumuladorPrecioCal;
-  var acumuladorPrecioArena;
+  var precioTotal;
+  var acumuladorPrecioTotal;
+  var acumuladorCantidadBolsas;
+  var cuenta;
+  var precioDescuento;
+  var acumuladorArena;
+  var acumuladorCemento;
+  var acumuladorCal;
+  var tipoMasCantidad;
   var tipoMasCaro;
+  var banderaPrimerTipo;
+  var precioMasCaro;
+
+  acumuladorPrecioTotal=0;
+  acumuladorCantidadBolsas=0;
+  porcentaje=0;
+  acumuladorArena=0;
+  acumuladorCemento=0;
+  acumuladorCal=0;
+  banderaPrimerTipo=1;
 
   respuesta="si";
-  acumuladorCantidadBolsas=0;
-  acumuladorCantidadArena=0;
-  acumuladorCantidadCal=0;
-  acumuladorCantidadCemento=0;
-  acumuladorPrecioBruto=0;
-  descuento=0;
-  acumuladorPrecioCemento=0;
-  acumuladorPrecioCal=0;
-  acumuladorPrecioArena=0;
 
   while(respuesta=="si")
   {
-  	tipoIngresado=prompt("Ingrese el tipo de producto, puede ser arena, cal y cemento");
-  	while(isNaN(tipoIngresado)==false || tipoIngresado!="arena" && tipoIngresado!="cal" && tipoIngresado!="cemento")
-  	{
-  		tipoIngresado=prompt("ERROR.Ingrese el tipo de producto, puede ser arena, cal y cemento");
-  	}
+    tipoIngresado=prompt("Ingrese el tipo de producto: arena, cal, cemento");
+    while(isNaN(tipoIngresado)==false || tipoIngresado!="arena" && tipoIngresado!="cal" && tipoIngresado!="cemento")
+    {
+      tipoIngresado=prompt("ERROR.Ingrese el tipo de producto: arena, cal, cemento");
+    }
 
-  	cantidadBolsasIngresadas=prompt("Ingrese la cantidad de bolsas");
-  	cantidadBolsasIngresadas=parseInt(cantidadBolsasIngresadas);
-  	while(isNaN(cantidadBolsasIngresadas)==true)
-  	{
-  		cantidadBolsasIngresadas=prompt("ERROR.Ingrese la cantidad de bolsas");
-  		cantidadBolsasIngresadas=parseInt(cantidadBolsasIngresadas);
-  	}
-  	acumuladorCantidadBolsas=acumuladorCantidadBolsas+cantidadBolsasIngresadas;
+    cantidadBolsasIngresadas=prompt("Ingrese la cantidad de bolsas");
+    cantidadBolsasIngresadas=parseInt(cantidadBolsasIngresadas);
+    while(isNaN(cantidadBolsasIngresadas)==true)
+    {
+      cantidadBolsasIngresadas=prompt("ERROR.Ingrese la cantidad de bolsas");
+      cantidadBolsasIngresadas=parseInt(cantidadBolsasIngresadas);
+    }
+    acumuladorCantidadBolsas=acumuladorCantidadBolsas+cantidadBolsasIngresadas;
 
-  	precioPorBolsasIngresadas=prompt("Ingrese el precio por bolsa");
-  	precioPorBolsasIngresadas=parseInt(precioPorBolsasIngresadas);
-  	while(isNaN(precioPorBolsasIngresadas)==true || precioPorBolsasIngresadas<1)
-  	{
-  		precioPorBolsasIngresadas=prompt("ERROR.Ingrese el precio por bolsa");
-  		precioPorBolsasIngresadas=parseInt(precioPorBolsasIngresadas);
-  	}
-  	//a) El importe total a pagar , bruto sin descuento y...
-  	precioBruto=cantidadBolsasIngresadas*precioPorBolsasIngresadas;
-    acumuladorPrecioBruto=acumuladorPrecioBruto+precioBruto;
-    //d) Informar el tipo con mas cantidad de bolsas. //f) El tipo mas caro
-  	switch(tipoIngresado)
-  	{
-  		case "arena":
-  		acumuladorCantidadArena=acumuladorCantidadArena+cantidadBolsasIngresadas;
-  		acumuladorPrecioArena=acumuladorPrecioArena+precioPorBolsasIngresadas;
-  		break;
+    precioIngresado=prompt("Ingrese el precio por bolsa");
+    precioIngresado=parseInt(precioIngresado);
+    while(isNaN(precioIngresado)==true || precioIngresado<0)
+    {
+      precioIngresado=prompt("ERROR.Ingrese el precio por bolsa");
+      precioIngresado=parseInt(precioIngresado);
+    }
 
-  		case "cal":
-  		acumuladorCantidadCal=acumuladorCantidadCal+cantidadBolsasIngresadas;
-  		acumuladorPrecioCal=acumuladorCantidadCal+precioPorBolsasIngresadas;
-  		break;
+    precioTotal=cantidadBolsasIngresadas*precioIngresado;
+    acumuladorPrecioTotal=acumuladorPrecioTotal+precioTotal;
 
-  		case "cemento":
-  		acumuladorCantidadCemento=acumuladorCantidadCemento+cantidadBolsasIngresadas;
-  		acumuladorPrecioCemento=acumuladorPrecioCemento+precioPorBolsasIngresadas;
-  		break;
-  	}
-     respuesta=prompt("si, para seguir comprando");
+    if (banderaPrimerTipo==1 || precioIngresado>precioMasCaro) 
+    {
+       precioMasCaro=precioIngresado;
+       tipoMasCaro=tipoIngresado;
+       banderaPrimerTipo=0;
+    }
+
+//d) Informar el tipo con mas cantidad de bolsas.
+    switch(tipoIngresado)
+    {
+      case "arena":
+      acumuladorArena=acumuladorArena+cantidadBolsasIngresadas;
+      break;
+
+      case "cemento":
+      acumuladorCemento=acumuladorCemento+cantidadBolsasIngresadas;
+      break;
+
+      case "cal":
+      acumuladorCal=acumuladorCal+cantidadBolsasIngresadas;
+      break;
+
+    }
+    respuesta=prompt("si, para continuar");
   }
 
-  if (acumuladorCantidadCal>acumuladorCantidadCemento && acumuladorCantidadCal>acumuladorCantidadArena) 
+  if (acumuladorArena>acumuladorCemento && acumuladorArena>acumuladorCal) 
   {
-      tipoMasCantidasBolsas="cal";
+     tipoMasCantidad="arena";
   }else
   {
-  	if (acumuladorCantidadCemento>acumuladorCantidadArena) 
-  	{
-  		tipoMasCantidasBolsas="cemento";
-  	}else
-  	{
-  		tipoMasCantidasBolsas="arena";
-  	}
+    if (acumuladorCemento>acumuladorCal) 
+    {
+      tipoMasCantidad="cemento";
+    }else
+    {
+      tipoMasCantidad="cal";
+    }
   }
-  //b) el importe total a pagar con descuento(solo si corresponde)
+
   if (acumuladorCantidadBolsas>30) 
+    {
+      porcentaje=25;
+    }else
+    {
+      if (acumuladorCantidadBolsas>10)
+       {
+         porcentaje=15;
+       }
+    }
+
+    cuenta=acumuladorPrecioTotal*porcentaje/100;
+    precioDescuento=acumuladorPrecioTotal- cuenta;
+
+  //a) El importe total a pagar , bruto sin descuento y...
+  console.log("El importe total a pagar , bruto sin descuento es: "+acumuladorPrecioTotal);
+  //b) el importe total a pagar con descuento(solo si corresponde)
+  if (acumuladorCantidadBolsas>10) 
   {
-  	 pocentaje=25;
-  }else
-  {
-  	if (acumuladorCantidadBolsas>10) 
-  	{
-  		porcentaje=15;
-  	}else
-  	{
-  		porcentaje=0;
-  	}
+    console.log("el importe total a pagar con descuento es: "+precioDescuento);
   }
+  //d) Informar el tipo con mas cantidad de bolsas.
+  console.log("el tipo con mas cantidad de bolsas es: "+tipoMasCantidad);
   //f) El tipo mas caro
-  if (acumuladorPrecioCemento>acumuladorPrecioArena && acumuladorPrecioCemento>acumuladorPrecioCal) 
-  {
-      tipoMasCaro="cemento";
-  }else
-  {
-  	if (acumuladorPrecioArena>acumuladorPrecioCal) 
-  	{
-  		tipoMasCaro="arena";
-  	}else
-  	{
-  		tipoMasCaro="cal";
-  	}
-  }
-
-  descuento=acumuladorPrecioBruto*porcentaje/100;
-  precioConDescuento=acumuladorPrecioBruto- descuento;
-
-  console.log("El importe total a pagar , bruto sin descuento es "+acumuladorPrecioBruto);
-  console.log("el importe total a pagar con descuento es "+precioConDescuento);
-  console.log("el tipo con mas cantidad de bolsas es "+tipoMasCantidasBolsas);
-  console.log("el tipo mas caro es "+tipoMasCaro);
+  console.log("el tipo mas caro es: "+tipoMasCaro);
 }

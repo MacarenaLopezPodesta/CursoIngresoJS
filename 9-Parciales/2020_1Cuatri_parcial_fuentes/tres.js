@@ -8,108 +8,128 @@ d) cuantas personas de la tercera edad( mas de 60 años) , tienen mas de 38 de t
 e) El promedio de edad entre los hombres solteros.*/
 function mostrar()
 {
-	var nombreIngresado;
-	var edadIngresada;
-	var sexoIngresado;
-	var estadoCivilIngresado;
-    var temperaturaCorporalIngresada;
-    var respuesta;
+	var respuesta;
+    var nombreIngresado;
+    var edadIngresada;
+    var sexoIngresado;
+    var estadoCivilIngresado;
+    var temperaturaIngresada;
+    var nombreMasTemperatura;
+    var temperaturaMayor;
+    var banderaPrimerPersona;
     var contadorMayorEdadViudos;
-    var contadorHombresViudosOSolteros;
-    var contadorPersonasMas60ConMasDe38;
-    var promedioEdadHombresSolteros;
+    var contadorHombresSolterosViudos;
+    var contadorMas60ConMas38Temperatura;
     var contadorHombresSolteros;
     var acumuladorEdadHombresSolteros;
-    var banderaPrimerTemperatura;
-    var nombreMayorTemperatura;
-    var temperaturaMayor;
+    var promedioEdadHombresSolteros;
 
     respuesta="si";
+    banderaPrimerPersona=1;
     contadorMayorEdadViudos=0;
-    contadorHombresViudosOSolteros=0;
-    contadorPersonasMas60ConMasDe38=0;
+    contadorHombresSolterosViudos=0;
+    contadorMas60ConMas38Temperatura=0;
     contadorHombresSolteros=0;
     acumuladorEdadHombresSolteros=0;
-    banderaPrimerTemperatura="es la primera";
 
     while(respuesta=="si")
     {
-    	nombreIngresado=prompt("Ingrese su nombre");
-    	while(isNaN(nombreIngresado)==false)
-    	{
-    		nombreIngresado=prompt("ERROR. Ingrese su nombre");
-    	}
-
-    	edadIngresada=prompt("Ingrese su edad");
-    	edadIngresada=parseInt(edadIngresada);
-    	while(isNaN(edadIngresada)==true)
-    	{
-    		edadIngresada=prompt("ERROR. Ingrese su edad");
-    		edadIngresada=parseInt(edadIngresada);
-    	}
-
-    	sexoIngresado=prompt("Ingrese f o m segun su sexo");
-    	while(isNaN(sexoIngresado)==false || sexoIngresado!="f" && sexoIngresado!="m")
-    	{
-    		sexoIngresado=prompt("ERROR. Ingrese f o m segun su sexo");
-    	}
-
-    	estadoCivilIngresado=prompt("Ingrese soltero, casado o viudo segun su estado civil");
-    	while(isNaN(estadoCivilIngresado)==false || estadoCivilIngresado!="soltero" && estadoCivilIngresado!="casado" && estadoCivilIngresado!="viudo")
-    	{
-    		estadoCivilIngresado=prompt("ERROR. Ingrese soltero, casado o viudo segun su estado civil");
-    	}
-
-    	temperaturaCorporalIngresada=prompt("Ingrese su temperatura corporal");
-    	temperaturaCorporalIngresada=parseFloat(temperaturaCorporalIngresada);
-    	while(isNaN(temperaturaCorporalIngresada)==true)
-    	{
-    		temperaturaCorporalIngresada=prompt("ERROR. Ingrese su temperatura corporal");
-    		temperaturaCorporalIngresada=parseFloat(temperaturaCorporalIngresada);
-    	}
-    	//a) El nombre de la persona con mas temperatura.
-    	if (banderaPrimerTemperatura=="es la primera") 
-    	{
-    	   temperaturaMayor=temperaturaCorporalIngresada;
-           nombreMayorTemperatura=nombreIngresado;
-           banderaPrimerTemperatura="no es la primera"
-    	}else
-    	{
-    		if (temperaturaCorporalIngresada>temperaturaMayor) 
-    		{
-    			temperaturaMayor=temperaturaCorporalIngresada;
-    			nombreMayorTemperatura=nombreIngresado;
-    		}
-    	}
-        //b) Cuantos mayores de edad estan viudos
-    	if (edadIngresada>18 && estadoCivilIngresado=="viudo") 
-    	{
-    		contadorMayorEdadViudos++;
-    	}
-    	//c) La cantidad de hombres que hay solteros o viudos.
-    	if (sexoIngresado=="m" && estadoCivilIngresado!="casado") 
-    	{
-            contadorHombresViudosOSolteros++;
-    	}
-    	//d) cuantas personas de la tercera edad( mas de 60 años) , tienen mas de 38 de temperatura
-        if (edadIngresada>60 && temperaturaCorporalIngresada>38) 
+        nombreIngresado=prompt("Ingrese su nombre");
+        while(isNaN(nombreIngresado)==false)
         {
-        	contadorPersonasMas60ConMasDe38++;
+            nombreIngresado=prompt("ERROR.Ingrese su nombre");
         }
-        //e) El promedio de edad entre los hombres solteros.
+
+        edadIngresada=prompt("Ingrese su edad");
+        edadIngresada=parseInt(edadIngresada);
+        while(isNaN(edadIngresada)==true)
+        {
+            edadIngresada=prompt("ERROR.Ingrese su edad");
+            edadIngresada=parseInt(edadIngresada);
+        }
+
+        sexoIngresado=prompt("Ingrese su sexo: f o m");
+        while(isNaN(sexoIngresado)==false || sexoIngresado!="f" && sexoIngresado!="m")
+        {
+            sexoIngresado=prompt("ERROR.Ingrese su sexo: f o m");
+        }
+
+        estadoCivilIngresado=prompt("Ingrese su estado civil: soltero, casado o viudo");
+        while(isNaN(estadoCivilIngresado)==false || estadoCivilIngresado!="soltero" && estadoCivilIngresado!="casado" && estadoCivilIngresado!="viudo")
+        {
+            estadoCivilIngresado=prompt("ERROR.Ingrese su estado civil: soltero, casado o viudo");
+        }
+
+        temperaturaIngresada=prompt("Ingrese su temperatura corporal");
+        temperaturaIngresada=parseInt(temperaturaIngresada);
+        while(isNaN(temperaturaIngresada)==true)
+        {
+            temperaturaIngresada=prompt("ERROR.Ingrese su temperatura corporal");
+            temperaturaIngresada=parseInt(temperaturaIngresada);
+        }
+
+        if (banderaPrimerPersona==1 || temperaturaIngresada>temperaturaMayor) 
+        {
+            temperaturaMayor=temperaturaIngresada;
+            nombreMasTemperatura=nombreIngresado;
+            banderaPrimerPersona=0;
+        }
+        if (edadIngresada>17 && estadoCivilIngresado=="viudo") 
+        {
+            contadorMayorEdadViudos++;
+        }
+
+        if (sexoIngresado=="m" && estadoCivilIngresado!="casado") 
+        {
+            contadorHombresSolterosViudos++;
+        }
+
+        if (edadIngresada>60 && temperaturaIngresada>38) 
+        {
+            contadorMas60ConMas38Temperatura++;
+        }
         if (sexoIngresado=="m" && estadoCivilIngresado=="soltero" ) 
         {
-        	contadorHombresSolteros++;
-        	acumuladorEdadHombresSolteros=acumuladorEdadHombresSolteros+edadIngresada;
+            contadorHombresSolteros++;
+            acumuladorEdadHombresSolteros=acumuladorEdadHombresSolteros+edadIngresada;
         }
-        respuesta=prompt("si, para continuar");
-    }
 
+        respuesta=prompt("Ingrese si para continuar")
+    }
     promedioEdadHombresSolteros=acumuladorEdadHombresSolteros/contadorHombresSolteros;
 
-    console.log("El nombre de la persona con mas temperatura es "+nombreMayorTemperatura);
-    console.log("la cantidad de mayores de edad viudos es "+contadorMayorEdadViudos);
-    console.log("La cantidad de hombres que hay solteros o viudos es "+contadorHombresViudosOSolteros);
-    console.log("la cantidad de personas de la tercera edad( mas de 60 años) que tienen mas de 38 de temperatura es "+contadorPersonasMas60ConMasDe38);
-    console.log("El promedio de edad entre los hombres solteros es "+promedioEdadHombresSolteros);
+    //a) El nombre de la persona con mas temperatura.
+    console.log("La persona con mas temperatura se llama: "+nombreMasTemperatura);
+    //b) Cuantos mayores de edad estan viudos
+    if (contadorMayorEdadViudos==0) 
+    {
+        console.log("No hay mayores de edad viudos");
+    }else
+    {
+        console.log("La cantidad de personas mayores de edad viudas son: "+contadorMayorEdadViudos);
+    }
+    //c) La cantidad de hombres que hay solteros o viudos.
+    if (contadorHombresSolterosViudos==0) 
+    {
+        console.log("No hay hombres solteros o viudos");
+    }else
+    {
+        console.log("La cantidad de hombres solteros o viudos es : "+contadorHombresSolterosViudos);
+    }
+    //d) cuantas personas de la tercera edad( mas de 60 años) , tienen mas de 38 de temperatura
+    if (contadorMas60ConMas38Temperatura==0) 
+    {
+        console.log("No hay personas de la tercera edad mas de 60 años que tienen mas de 38 de temperatura");
+    }else
+    {
+        console.log("La cantidad de personas de la tercera edad mas de 60 años que tienen mas de 38 de temperatura es : "+contadorMas60ConMas38Temperatura);
+    }
+    //e) El promedio de edad entre los hombres solteros
+    if (contadorHombresSolteros==0) 
+    {
+        console.log("No hay hombres solteros");
+    }else
+    {
+        console.log("La promedio de edad de los hombres solteros es : "+promedioEdadHombresSolteros);
+    }
 }

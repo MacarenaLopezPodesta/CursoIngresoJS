@@ -17,112 +17,126 @@ function mostrar()
     var precioIngresado;
     var cantidadIngresada;
     var marcaIngresada;
-    var fabricanteIngresada;
-    var banderaDelPrimerAlcohol;
-    var cantidadAlcoholMasBarato;
-    var fabricanteAlcoholMasBarato;
-    var precioAlcoholMasBarato;
-    var tipoMasCantidad;
-    var acumuladorJabon;
-    var acumuladorBarbijo;
-    var acumuladorAlcohol;
-    var contadorJabon;
-    var contadorBarbijo;
+    var fabricanteIngresado;
     var contadorAlcohol;
+    var precioBaratoAlcohol;
+    var cantidadBaratoALcohol;
+    var fabricanteBaratoAlcohol;
+    var contadorBarbijo;
+    var acumuladorBarbijo;
+    var contadorJabon;
+    var acumuladorJabon;
+    var acumuladorAlcohol;
+    var tipoMasUnidades;
     var promedio;
-  
-    banderaDelPrimerAlcohol="es el primer alcohol";
-    acumuladorJabon=0;
-    acumuladorBarbijo=0;
-    acumuladorAlcohol=0;
-    contadorJabon=0;
-    contadorBarbijo=0;
-    contadorAlcohol=0;
 
-    for(contadorProductos=0;contadorProductos<1;contadorProductos++)
-    {       
-        tipoIngresado=prompt("Ingrese el tipo producto #"+contadorProductos);
-        while(isNaN(tipoIngresado)==false||tipoIngresado!="barbijo" && tipoIngresado!="jabon" && tipoIngresado!="alcohol")
+    contadorAlcohol=0;
+    contadorBarbijo=0;
+    acumuladorBarbijo=0;
+    contadorJabon=0;
+    acumuladorJabon=0;
+    acumuladorAlcohol=0;
+
+
+    for(contadorProductos=0;contadorProductos<5;contadorProductos++)
+    {
+        tipoIngresado=prompt("Ingrese el tipo de producto: barbijo , jabon o alcohol");
+        while(isNaN(tipoIngresado)==false || tipoIngresado!="barbijo" && tipoIngresado!="jabon" && tipoIngresado!="alcohol")
         {
-            tipoIngresado=prompt("Error. Ingrese el tipo de producto");
+            tipoIngresado=prompt("ERROR.Ingrese el tipo de producto: barbijo , jabon o alcohol");
         }
 
-        precioIngresado=prompt("Ingrese el precio");
-        precioIngresado=parseInt(precioIngresado);
+        precioIngresado=prompt("Ingrese el precio del producto: entre 100 y 300");
         while(isNaN(precioIngresado)==true || precioIngresado<100 || precioIngresado>300)
         {
-           precioIngresado=prompt("Error. Ingrese el precio");
-           precioIngresado=parseInt(precioIngresado); 
+            precioIngresado=prompt("ERROR.Ingrese el precio del producto: entre 100 y 300");
         }
+        precioIngresado=parseFloat(precioIngresado);
 
-        cantidadIngresada=prompt("Ingrese la cantidad de unidades");
+        cantidadIngresada=prompt("Ingrese la cantidad: no puede ser 0 o negativo y no debe superar las 1000 unidades");
         cantidadIngresada=parseInt(cantidadIngresada);
         while(isNaN(cantidadIngresada)==true || cantidadIngresada<1 || cantidadIngresada>1000)
         {
-           cantidadIngresada=prompt("Error. Ingrese la cantidad de unidades");
-           cantidadIngresada=parseInt(cantidadIngresada); 
+            cantidadIngresada=prompt("ERROR.Ingrese la cantidad: no puede ser 0 o negativo y no debe superar las 1000 unidades");
+            cantidadIngresada=parseInt(cantidadIngresada);
         }
 
         marcaIngresada=prompt("Ingrese la marca");
         while(isNaN(marcaIngresada)==false)
         {
-            marcaIngresada=prompt("Error. Ingrese la marca");
+            marcaIngresada=prompt("ERROR.Ingrese la marca");
         }
 
-        fabricanteIngresada=prompt("Ingrese el fabricante");
-        while(isNaN(fabricanteIngresada)==false)
+        fabricanteIngresado=prompt("Ingrese el fabricante");
+        while(isNaN(fabricanteIngresado)==false)
         {
-            fabricanteIngresada=prompt("Error. Ingrese el fabricante");
-        }            
-             
+            fabricanteIngresado=prompt("ERROR.Ingrese el fabricanteIngresado");
+        }
         //b) Del tipo con mas unidades, el promedio por compra
+        //c) Cuántas unidades de jabones hay en total
         switch(tipoIngresado)
         {
             case "alcohol":
             //a) Del más barato de los alcohol, la cantidad de unidades y el fabricante
-            if (banderaDelPrimerAlcohol=="es el primer alcohol" || (precioIngresado<precioAlcoholMasBarato))
-            {
-               precioAlcoholMasBarato=precioIngresado;
-               cantidadAlcoholMasBarato=cantidadIngresada;
-               fabricanteAlcoholMasBarato=fabricanteIngresada;
-               banderaDelPrimerAlcohol="no es el primer alcohol";
-            }
-            acumuladorAlcohol=acumuladorAlcohol+cantidadIngresada;
             contadorAlcohol++;
+            acumuladorAlcohol=acumuladorAlcohol+cantidadIngresada;
+            if (contadorAlcohol==1 || precioIngresado<precioBaratoAlcohol) 
+            {
+                precioBaratoAlcohol=precioIngresado;
+                cantidadBaratoALcohol=cantidadIngresada;
+                fabricanteBaratoAlcohol=fabricanteIngresado;
+            }
+
             break;
 
             case "jabon":
-            acumuladorJabon=acumuladorJabon+cantidadIngresada; //c) Cuántas unidades de jabones hay en total
             contadorJabon++;
+            acumuladorJabon=acumuladorJabon+cantidadIngresada;
             break;
 
             case "barbijo":
-            acumuladorBarbijo=acumuladorBarbijo+cantidadIngresada;
             contadorBarbijo++;
+            acumuladorBarbijo=acumuladorBarbijo+cantidadIngresada;
             break;
         }
-    }
-    if (acumuladorAlcohol>acumuladorJabon && acumuladorAlcohol>acumuladorBarbijo) 
+    }  
+
+    if (acumuladorAlcohol>acumuladorBarbijo && acumuladorAlcohol>acumuladorJabon) 
     {
-        tipoMasCantidad="alcohol";
+        tipoMasUnidades="alcohol";
         promedio=acumuladorAlcohol/contadorAlcohol;
     }else
     {
         if (acumuladorBarbijo>acumuladorJabon) 
         {
-            tipoMasCantidad="barbijo";
+            tipoMasUnidades="barbijo";
             promedio=acumuladorBarbijo/contadorBarbijo;
         }else
         {
-            tipoMasCantidad="jabon";
+            tipoMasUnidades="jabon";
             promedio=acumuladorJabon/contadorJabon;
         }
     }
+
+
+
     //a) Del más barato de los alcohol, la cantidad de unidades y el fabricante
-    console.log("Del más barato de los alcohol, la cantidad de unidades es "+cantidadAlcoholMasBarato+" y el fabricante es "+fabricanteAlcoholMasBarato);
+    if (contadorAlcohol==0) 
+    {
+        console.log("No hay alcohol");
+    }else
+    {
+        console.log("Del más barato de los alcohol, la cantidad de unidades es "+cantidadBaratoALcohol+" y el fabricante es "+fabricanteBaratoAlcohol)
+    }
     //b) Del tipo con mas unidades, el promedio por compra
-    console.log("El tipo con mas unidades es "+tipoMasCantidad+ " y el promedio por compra es "+promedio);
-    //c) Cuántas unidades de jabones hay en total
-    console.log("Las unidades de jabones hay en total es de "+acumuladorJabon);    
+    console.log("el tipo con mas unidades es "+tipoMasUnidades+" y el promedio por compra es: "+promedio);
+    // Cuántas unidades de jabones hay en total
+    if (contadorJabon==0) 
+    {
+        console.log("No hay jabones");
+    }else
+    {
+        console.log("La cantidad de jabones que hay en total es: "+acumuladorJabon);
+    }
 }
 
